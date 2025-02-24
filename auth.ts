@@ -8,22 +8,29 @@ import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 
+import GitHubProvider from "next-auth/providers/github"; // NMT
+
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 async function getUser(email: string): Promise<User | undefined> {
-    try {
-      const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
-      return user[0];
-    } catch (error) {
-      console.error('Failed to fetch user:', error);
-      throw new Error('Failed to fetch user.');
-    }
+  try {
+    const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
+    return user[0];
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw new Error('Failed to fetch user.');
   }
+}
  
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
+    // GitHub OAuth Provider: added by NMT
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
     Credentials({
         async authorize(credentials) {
             const parsedCredentials = z
