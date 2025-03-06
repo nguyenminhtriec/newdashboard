@@ -131,3 +131,13 @@ export async function authenticate(
     throw error;
   }
 }
+
+
+export async function fetchPhotos() {
+  const res = await fetch('https://android-kotlin-fun-mars-server.appspot.com/photos');
+  if (!res.ok) 
+    return undefined;
+  const photos = res.json();
+
+  return photos;
+}
