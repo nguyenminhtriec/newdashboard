@@ -7,6 +7,8 @@ import postgres from 'postgres';
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { MarkOptions } from 'perf_hooks';
+import { NumericLiteral } from 'typescript';
 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -132,12 +134,24 @@ export async function authenticate(
   }
 }
 
+export type MarsPhoto = {id: number, img_src: string};
 
-export async function fetchPhotos() {
-  const res = await fetch('https://android-kotlin-fun-mars-server.appspot.com/photos');
+export async function fetchPhotos(earth_date: string | undefined, api_key="DEMO_KEY") {
+  
+  const params = {
+    earth_date: earth_date,
+    api_key: api_key,
+  };
+  
+  const pathname = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?';
+  const queryUrl = `${pathname}earth_date=${params.earth_date}&api_key=${params.api_key}`;
+
+  const res = await fetch(queryUrl, {cache: 'force-cache'});
+
   if (!res.ok) 
     return undefined;
-  const photos = res.json();
+  const data = await res.json();
+  const photos: MarsPhoto[] = await data.photos;
 
   return photos;
 }

@@ -1,19 +1,14 @@
 
-import { fetchPhotos } from "@/app/lib/actions";
+import { fetchPhotos, MarsPhoto } from "@/app/lib/actions";
 
 
-const photos: {id: number, img_src: string}[] = await fetchPhotos();
+export  default async function Page(props: Promise<{id: string, img_src: string}>) {
 
-export default async function Page({params}: {params: Promise<{id: string}>}) {
-
-    const {id} = await params;
-    
-    const found = photos?.find(p => p.id.toString() === id);
+    const {id, img_src} = await props;
 
     return (
         <div>
-            <label>{id}</label>
-            <img src={found?.img_src} alt='Photo not found.' />
+            <img src={img_src} />
         </div>
     )
 }
