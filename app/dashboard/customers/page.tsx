@@ -44,21 +44,18 @@ export default async function Page(props: {
       //   )}
       // </ul>
 
-      <div className="flex flex-col h-screen">
-        {/* <Search placeholder="Date [yyyy-mm-dd]" /> */}
-        <div >
-          <PhotosByPage photos={photos} index={index} pageSize={PAGE_SIZE}  />  
-        </div>     
-        
+      <div className="h-screen">
+        <Search placeholder="Date [yyyy-mm-dd]" />
+        <PhotosByPage photos={photos} index={index} pageSize={PAGE_SIZE}  />  
         {/* <Pagination totalPages={totalPage} /> */}
-         
-        <CustomersNav totalPage={totalPage} />
-        
+        {photos.length ? <CustomersNav totalPage={totalPage} /> : undefined }
       </div>
     )
   }
 
-  async function PhotosByPage({photos, index, pageSize} : {photos: MarsPhoto[], index: number, pageSize: number} ) {
+  async function PhotosByPage({photos, index, pageSize} : {
+    photos: MarsPhoto[], index: number, pageSize: number
+  }) {
     const photosByPage = photos.slice(index, index+pageSize);
     return (
       <div className="grid grid-cols-4 gap-2">
