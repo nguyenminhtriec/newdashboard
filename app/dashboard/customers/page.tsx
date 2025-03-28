@@ -1,73 +1,94 @@
-
-
+//
 import { Metadata } from "next";
-import Link from "next/link";
 import { fetchPhotos } from "@/app/lib/actions";
-import Pagination from "@/app/ui/invoices/pagination";
-import { MarsPhoto } from "@/app/lib/actions";
-import Search from "@/app/ui/search";
-import { CustomersNav } from "@/app/ui/customers/page-nav";
+import SearchPhotos from "@/app/ui/customers/search-photos"; 
+import { PhotosPageNav } from "@/app/ui/customers/page-nav";
+
+import { PhotosByPage } from "@/app/ui/customers/photo-page";
+
 
 
 export const metadata: Metadata = {
     title: 'Mars Photos',
 };
 
-const PAGE_SIZE = 8;
-let index: number = 0;
-
-
 export default async function Page(props: {
   searchParams?: Promise<{
     query?: string;
     page?: string;
+    pagesize?: string;
   }>;
-}) {  
+}) { 
     const searchParams = await props.searchParams;
     const query = searchParams?.query || '';
-    const currentPage = searchParams?.page || 1;
-
     const photos = await fetchPhotos(query) || [];
-    const totalPage = Math.ceil(photos.length / PAGE_SIZE);
- 
-    index = (Number(currentPage)-1) * (PAGE_SIZE);
-    
-   
-    return (
-      
-      // <ul className="grid grid-cols-4 gap-2">
-      //   {dataFirst5.map(photo => 
-      //     <li key={photo.id} className="">
-      //       <label>{photo.id}</label>
-      //       <img src={photo.img_src}  alt='' />
-      //     </li>        
-      //   )}
-      // </ul>
 
-      <div className="h-screen">
-        <Search placeholder="Date [yyyy-mm-dd]" />
-        <PhotosByPage photos={photos} index={index} pageSize={PAGE_SIZE}  />  
-        {/* <Pagination totalPages={totalPage} /> */}
-        {photos.length ? <CustomersNav totalPage={totalPage} /> : undefined }
+    const currentPage = searchParams?.page || "1";
+    const pageSize = Number(searchParams?.pagesize) || 8; 
+    const totalPage = Math.ceil(photos.length / pageSize);
+    
+    return (
+      <div className="h-full">
+        <SearchPhotos placeholder="Date [yyyy-mm-dd]" />
+        <PhotosByPage photos={photos} currentPage={Number(currentPage)} pageSize={pageSize}  />  
+        { photos.length ? 
+          <PhotosPageNav totalPage={totalPage} currentPage={Number(currentPage)} pageSize={pageSize} /> 
+          : undefined }
       </div>
     )
   }
 
-  async function PhotosByPage({photos, index, pageSize} : {
-    photos: MarsPhoto[], index: number, pageSize: number
-  }) {
-    const photosByPage = photos.slice(index, index+pageSize);
-    return (
-      <div className="grid grid-cols-4 gap-2">
-          {photosByPage.map(photo =>
-            <div key={photo.id}>
-              <label>{photo.id}</label>
-              <Link href={`/dashboard/customers/${photo.id.toString()}`}>
-                <img src={photo.img_src}  alt='' />
-              </Link>
-              
-            </div>
-          )}
-      </div> 
-    )
-  }
+/** sending [pathname] and [query] in a [url] object. */
+// import Link from "next/link";
+// import { MarsPhoto } from "@/app/lib/actions"; 
+// import { PhotoCard } from "./photo-card";
+
+// export function PhotosByPage({photos, currentPage, pageSize} : {
+//     photos: MarsPhoto[], currentPage: number, pageSize: number
+//   }) {
+    
+//     const index = (currentPage) ? (currentPage-1) * pageSize : 0;    
+//     const photosByPage = (currentPage) ?  photos.slice(index, index+pageSize) : photos;
+  
+//     return (
+//       <div className="grid grid-cols-4 gap-2">
+//           {photosByPage.map(photo => {
+//             const url = {
+//               pathname: `/dashboard/customers/${photo.id.toString()}`,
+//               query: { img_src: photo.img_src },
+//             }
+//             return (
+//               <div key={photo.id}>
+//               <label>{photo.id}</label>
+//               <Link href={url}>
+//                 <img src={photo.img_src}  alt='' />
+//               </Link>             
+//             </div>
+//             )
+//           }
+//         )}
+//       </div> 
+//     )
+//   }
+  
+
+
+  // import { MarsPhoto } from "@/app/lib/actions"; 
+  // import { PhotoCard } from "@/app/ui/customers/photo-card";
+
+  // export function PhotosByPage({photos, currentPage, pageSize} : {
+  //   photos: MarsPhoto[], currentPage: number, pageSize: number
+  // }) {
+    
+  //   const index = (currentPage-1) * pageSize;    
+  //   const photosByPage = (currentPage > 0) ?  photos.slice(index, index+pageSize) : photos;
+
+  //   return (
+  //     <div className="grid grid-cols-4 gap-2">
+  //       {photosByPage.map(photo => 
+  //         <PhotoCard key={photo.id} photo={photo}></PhotoCard>
+  //       )}
+  //     </div>
+  //   )
+    
+  // }  
