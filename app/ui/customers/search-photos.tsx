@@ -31,7 +31,7 @@ export default function SearchPhotos({ placeholder }: { placeholder: string }  )
         value={inputValue}
         className="peer block w-[20%] rounded-md border border-gray-200 py-2 pl-1 text-sm text-center outline-2 placeholder:text-gray-200 bg-teal-600"
         placeholder={placeholder}
-        // defaultValue={searchParams.get('query')?.toString()} : No use.
+        // defaultValue={ searchParams.get('query') }
         onChange={ handleChange }
       />
       <button onClick={() => setInputValue("")} disabled={!inputValue} >
