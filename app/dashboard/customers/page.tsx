@@ -32,7 +32,7 @@ export default async function Page(props: {
         <SearchPhotos placeholder="Date [yyyy-mm-dd]" />
         <PhotosByPage photos={photos} currentPage={Number(currentPage)} pageSize={pageSize}  />  
         { photos.length ? 
-          <PhotosPageNav totalPage={totalPage} currentPage={Number(currentPage)} pageSize={pageSize} /> 
+          <PhotosPageNav totalPage={totalPage} currentPage={Number(currentPage)} /> 
           : undefined }
       </div>
     )
