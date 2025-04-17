@@ -39,7 +39,7 @@ function Arrow({ disabled, href, children }:
     {disabled: boolean, href: string, children: React.ReactNode}) {
     return (
         !disabled ?
-         <Link href={href} className="text-sky-400">
+         <Link href={href} className="text-sky-400 disabled:text-gray-600">
             {children}
          </Link> 
         : <button disabled={disabled}>{children}</button>
@@ -70,7 +70,7 @@ function PageSizeSelection() {
                 handlePageSize(e.target.value);
             }}
         >               
-            <option>Photos per page</option>
+            <option >Photos per page</option>
             {sizeList.map(size => 
                 <option key={sizeList.indexOf(size)} value={size} >
                 {size} 

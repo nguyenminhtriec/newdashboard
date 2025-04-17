@@ -28,7 +28,7 @@ export default async function Page(props: {
     const totalPage = Math.ceil(photos.length / pageSize);
     
     return (
-      <div className="h-full">
+      <div className="relative top-44 md:top-0 h-full">
         <SearchPhotos placeholder="Date [yyyy-mm-dd]" />
         <PhotosByPage photos={photos} currentPage={Number(currentPage)} pageSize={pageSize}  />  
         { photos.length ? 

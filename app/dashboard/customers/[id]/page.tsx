@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { usePhoto } from "@/app/ui/customers/photo-context";
 import { useState } from "react";
 import { MarsPhoto } from "@/app/lib/actions";
@@ -15,12 +15,14 @@ export default function Page() {
 
     
     const {selectedPhoto} = usePhoto();
+    const router = useRouter();
+    const handleClick = () => router.back();
 
     return (
       
         <div className='flex flex-col flex-grow'>
           <label>{selectedPhoto?.id}</label>
-          <img className='max-w-[70%]' src={selectedPhoto?.img_src} alt='Mars photo.'></img>
+          <img onClick={handleClick} className='max-w-[70%] cursor-pointer' src={selectedPhoto?.img_src} alt='Mars photo.'></img>
         
           <Welcome />
           <ResponsiveNavBar />        

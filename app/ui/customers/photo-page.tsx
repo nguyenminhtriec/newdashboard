@@ -16,7 +16,7 @@ export function PhotosByPage({photos, currentPage, pageSize}
       const {setSelectedPhoto} = usePhoto();
               
       return (           
-          <div className="grid grid-cols-4 gap-2">       
+          <div className="grid grid-cols-4 gap-2 z-20">       
             { photosByPage.map(photo => 
               <PhotoCard key={photo.id}            
                 photo={photo}               
