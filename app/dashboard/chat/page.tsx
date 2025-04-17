@@ -4,9 +4,10 @@
 
 import { Send, X } from 'lucide-react'; 
 import { useState, } from "react";
-import ReactMarkdown from 'react-markdown';
+
 import { Message } from "@/app/lib/chat-action";
 import { aiHandleMessage } from "@/app/lib/chat-action";
+import { ChatRound } from '@/app/ui/chat/chat-round';
 
 
 export default function Page() {
@@ -75,14 +76,3 @@ export default function Page() {
 
 }
 
-export function ChatRound({role, message}: {role: string, message: string}) {
-    return (        
-        <div 
-            style={{ textAlign: role==='user' ? 'right' : 'left'}}
-            className='rounded-2xl bg-gray-600 text-gray-100 px-4 py-2 text-sm '>
-            <ReactMarkdown>
-                {message}
-            </ReactMarkdown>
-        </div>        
-    )
-}
