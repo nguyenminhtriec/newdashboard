@@ -1,15 +1,17 @@
 
 import { GoogleGenAI } from "@google/genai";
+import { Message } from "@/app/lib/chat-action";
 
 
-export type Message = {role: "user" | "model" , text: string};
 
-export async function aiGenerateMessage(history: Message[], textMessage: string) {
-    const apiKey = process.env.G_KEY;
+export async function POST(props: Promise<{history: Message[], textMessage: string}>) {
+
+    const {history, textMessage} = await props;
+    const apiKey = process.env.GOOGLE_API_KEY;
 
     const ai = new GoogleGenAI({apiKey: apiKey});
 
-    const response = ai.models.generateContent({
+    const response = await ai.models.generateContent({
         model: 'gemini-2.0-flash',
         contents: [...history, {role: "user", text: textMessage}],
         config: {systemInstruction: 'Always give answers as short as possible.' }

@@ -1,22 +1,21 @@
 
 'use client';
 
-
 import { Send, X } from 'lucide-react'; 
 import { useState, } from "react";
 
 import { Message } from "@/app/lib/chat-action";
-import { aiHandleMessage } from "@/app/lib/chat-action";
-import { ChatRound } from '@/app/ui/chat/chat-round';
+import { aiGenerateMessage } from "@/app/lib/chat-action";
+import { ChatHistory } from '@/app/ui/chat/chat-history';
+
 
 
 export default function Page() {
+
     const [textMessage, setTextMessage] = useState('');
     const [history, setHistory] = useState<Message[]>([]);
 
-    // console.log("textMessage now: " + textMessage);
-    // console.log(history.length);
-    // console.log(history.slice(-1)[0]);
+    console.log(history.slice(-1)[0]);   
 
     function addMessage(role: "user" | "model", newTextMessage: string ) {      
         const newMessage: Message = { role: role, text: newTextMessage };      
@@ -26,26 +25,19 @@ export default function Page() {
     async function handleMessage() {
 
         addMessage("user", textMessage);
-        const promise = aiHandleMessage(history, textMessage);           
-        promise.then(response => {
-            if (response.text) addMessage("model", response.text);         
-            setTextMessage('');              
-        }).catch((error: Error) => {
-            console.log('Error now: ' + error.message);
-        });               
+        try {
+            const response = await aiGenerateMessage(history, textMessage);   
+            if (response && response.text) 
+                addMessage("model", response.text);         
+            setTextMessage(''); 
+        } catch (error) {
+            console.log("Error now is: ", error);
+        }                  
     }
     return (
         <div className='h-full space-y-8'>
-            <div className='space-y-4'>
-                {history.map((item, index) => 
-                <ChatRound 
-                    key={index} 
-                    role={item.role} 
-                    message={item.text} /> )}
-            </div>
-            <div 
-                className='flex w-full justify-start bg-gray-600 text-gray-100 text-sm'
-            >                           
+            <ChatHistory history={history} />
+            <div className='flex w-full justify-start bg-gray-600 text-gray-100 text-sm'>                           
                 <input className='bg-gray-700 text-gray-100 w-full'
                     type="text"
                     placeholder="Ask me anything..."
@@ -65,14 +57,11 @@ export default function Page() {
                         }} 
                         disabled={!textMessage} 
                     >
-                        <Send strokeWidth={1} color='aqua'  className='disabled:color-gray-600'/>
+                        <Send strokeWidth={1} color='aqua' />
                     </button>
-                </div>
-                                
-            </div>
-        </div>
-        
+                </div>                    
+            </div>           
+        </div>        
     )
-
 }
 
