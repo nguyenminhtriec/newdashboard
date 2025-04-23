@@ -1,67 +1,11 @@
+'use server';
 
-'use client';
+import { ChatInterFace } from "@/app/ui/chat/chat-interface";
+import { ChatScreen } from "@/app/ui/chat/chat-input";
+import { ChatFace } from "@/app/ui/chat/chat-use-api";
 
-import { Send, X } from 'lucide-react'; 
-import { useState, } from "react";
-
-import { Message } from "@/app/lib/chat-action";
-import { aiGenerateMessage } from "@/app/lib/chat-action";
-import { ChatHistory } from '@/app/ui/chat/chat-history';
-
-
-
-export default function Page() {
-
-    const [textMessage, setTextMessage] = useState('');
-    const [history, setHistory] = useState<Message[]>([]);
-
-    console.log(history.slice(-1)[0]);   
-
-    function addMessage(role: "user" | "model", newTextMessage: string ) {      
-        const newMessage: Message = { role: role, text: newTextMessage };      
-        setHistory(prev => [...prev, newMessage]);           
-    }
-
-    async function handleMessage() {
-
-        addMessage("user", textMessage);
-        try {
-            const response = await aiGenerateMessage(history, textMessage);   
-            if (response && response.text) 
-                addMessage("model", response.text);         
-            setTextMessage(''); 
-        } catch (error) {
-            console.log("Error now is: ", error);
-        }                  
-    }
+export default async function Page() {
     return (
-        <div className='h-full space-y-8'>
-            <ChatHistory history={history} />
-            <div className='flex w-full justify-start bg-gray-600 text-gray-100 text-sm'>                           
-                <input className='bg-gray-700 text-gray-100 w-full'
-                    type="text"
-                    placeholder="Ask me anything..."
-                    value={textMessage}
-                    onChange={(e) => setTextMessage(e.target.value)}
-                />
-                <div className='flex w-[10%] justify-center space-x-4'>
-                    <button 
-                        disabled={!textMessage}
-                        onClick={() => setTextMessage("") }
-                    >
-                        <X strokeWidth={1} color={'aqua'} />
-                    </button>
-                    <button 
-                        onClick={() => {                           
-                            handleMessage();                          
-                        }} 
-                        disabled={!textMessage} 
-                    >
-                        <Send strokeWidth={1} color='aqua' />
-                    </button>
-                </div>                    
-            </div>           
-        </div>        
+        <ChatFace />
     )
 }
-
