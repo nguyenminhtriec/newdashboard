@@ -12,7 +12,7 @@ export function ChatScreen() {
     const [textMessage, setTextMessage] = useState('');
     const [history, setHistory] = useState<Message[]>([]);
 
-    console.log(history.slice(-1)[0]);   
+    // console.log(history.slice(-1)[0]);   
 
     function addMessage(role: "user" | "model", newTextMessage: string ) {      
         const newMessage: Message = { role: role, text: newTextMessage };      

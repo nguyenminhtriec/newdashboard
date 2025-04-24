@@ -2,7 +2,7 @@
 
 'use client';
 
-import { aiGenerateMessage } from "@/app/lib/chat-action";
+import { aiGenerateAndHandleMessage } from "@/app/lib/chat-action";
 import { ChatHistory } from '@/app/ui/chat/chat-history';
 import { useActionState } from 'react';
 import { Send, X } from 'lucide-react'; 
@@ -10,8 +10,8 @@ import { Send, X } from 'lucide-react';
 
 export function ChatInterFace() {
 
-    const [history, formAction, isPending] = useActionState(aiGenerateMessage, []);
-    console.log(history.slice(-1)[0]);   
+    const [history, formAction, isPending] = useActionState(aiGenerateAndHandleMessage, []);
+    // console.log(history.slice(-1)[0]);   
 
     return (
         <div className='h-full space-y-8'>
@@ -22,7 +22,7 @@ export function ChatInterFace() {
                 <div className='flex w-full justify-start bg-gray-600 text-gray-100 text-sm'>                           
                     <input className='bg-gray-700 text-gray-100 w-full'
                         type="text"
-                        name="userTextMessage" id = "userTextMessage"
+                        name="userTextMessage" id="userTextMessage"
                         placeholder="Ask me anything..."
                         onChange={(e) => (e.target.value)}
                     />
