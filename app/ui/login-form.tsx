@@ -95,6 +95,4 @@ export default function LoginForm() {
 }
 
 
-export function GitHubLogInButton () {
-  return <Button className="mt-4 w-full" onClick={() => signIn('github')}>Sign in with GitHub</Button>
-}
+
