@@ -31,8 +31,7 @@ export async function aiGenerateAndHandleMessage(history: Message[], formData: F
     } catch (error) {
         console.error("Current error: ", error);
         return nextHistory;
-    }
-    
+    }    
 }
 
 // Option 2: to use with non-form inputs, non-API

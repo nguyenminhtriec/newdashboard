@@ -8,14 +8,13 @@ import { useActionState } from 'react';
 import { Send, X } from 'lucide-react'; 
 
 
-export function ChatInterFace() {
+export function ChatInterface() {
 
     const [history, formAction, isPending] = useActionState(aiGenerateAndHandleMessage, []);
     // console.log(history.slice(-1)[0]);   
 
     return (
-        <div className='h-full space-y-8'>
-           
+        <div className='h-full space-y-8'>          
             <form action={formAction} className='space-y-8'>
                 <ChatHistory history={history} />
                 
