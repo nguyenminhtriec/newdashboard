@@ -3,6 +3,7 @@ import AcmeLogo from '@/app/ui/acme-logo';
 import LoginForm from '@/app/ui/login-form';
 import { Suspense } from 'react';
 import { GitHubLogIn } from '@/app/ui/github-login';
+import { GoogleLogIn } from '../ui/google-login';
 
  
 export default function LoginPage() {
@@ -17,6 +18,7 @@ export default function LoginPage() {
         <Suspense>
           <LoginForm />
           <GitHubLogIn />
+          <GoogleLogIn />
         </Suspense>
       </div>
     </main>

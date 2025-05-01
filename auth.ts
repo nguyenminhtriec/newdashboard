@@ -9,6 +9,7 @@ import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 
 import GitHubProvider from "next-auth/providers/github"; // NMT
+import Google from 'next-auth/providers/google';
 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -31,6 +32,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    Google,
     Credentials({
         async authorize(credentials) {
             const parsedCredentials = z
