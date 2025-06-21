@@ -34,7 +34,8 @@ export async function aiGenerateAndHandleMessage(history: Message[], formData: F
     }    
 }
 
-// Option 2: to use with non-form inputs, non-API
+// Option 2: to use with non-form inputs, non-API (this function is to be called from client side component)
+// this option is not recommended because of security issues (leaking api key): ChatGPT
 export async function aiCreateMessage(history: Message[], textMessage: string) {
     const apiKey = process.env.NEXT_PUBLIC_G_KEY;
     const ai = new GoogleGenAI({apiKey: apiKey});
@@ -49,7 +50,7 @@ export async function aiCreateMessage(history: Message[], textMessage: string) {
 }
 
 // Option 3: to use with non-form inputs and API (POST request)
-// extract [sendMessage] funtion with single functionality: make the POST request to API
+// extract [sendMessage] funtion for single functionality: make the POST request to API
 export async function sendMessage(history: Message[], textMessage: string) {
     try {
         const response = await fetch('/dashboard/chat/api', {

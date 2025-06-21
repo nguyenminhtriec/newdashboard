@@ -23,7 +23,7 @@ export function PhotosPageNav({
     };
    
     return(
-        <div className="fixed bottom-0 flex w-full text-sm items-center justify-center space-x-8 scroll-m-0 bg-teal-800">
+        <div className="fixed bottom-0 flex w-full text-sm items-center justify-center space-x-8 scroll-m-0 bg-primary/90 dark:bg-dprimary/90 text-dtext">
             <Arrow disabled={currentPage<=1} href={createPageURL(1)}><ChevronFirst /></Arrow>
             <Arrow disabled={currentPage<=1} href={createPageURL(currentPage-1)}><ChevronLeft /></Arrow>
             { !currentPage ? <span>All photos</span> : <span className='text-xs'>Page {currentPage}/{totalPage}</span>}
@@ -63,7 +63,7 @@ function PageSizeSelection() {
     });
 
     return (
-        <select className='w-auto text-xs bg-teal-700'
+        <select className='w-auto text-xs border-e-sky-200 bg-primary dark:bg-primary dark:text-dtext'
             id='pageSizeSelection'
             // defaultValue="8"
             onChange={(e) => {

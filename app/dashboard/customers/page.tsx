@@ -7,7 +7,6 @@ import { PhotosPageNav } from "@/app/ui/customers/page-nav";
 import { PhotosByPage } from "@/app/ui/customers/photo-page";
 
 
-
 export const metadata: Metadata = {
     title: 'Mars Photos',
 };

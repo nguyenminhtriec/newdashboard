@@ -14,12 +14,11 @@ export function ChatInterface() {
     // console.log(history.slice(-1)[0]);   
 
     return (
-        <div className='h-full space-y-8'>          
-            <form action={formAction} className='space-y-8'>
-                <ChatHistory history={history} />
-                
-                <div className='flex w-full justify-start bg-gray-600 text-gray-100 text-sm'>                           
-                    <input className='bg-gray-700 text-gray-100 w-full'
+        <div className='h-full space-y-8'>  
+            <ChatHistory history={history} />        
+            <form action={formAction} className='space-y-8'>                                
+                <div className='flex w-full justify-start bg-cyan-600 text-gray-100 text-sm'>                           
+                    <input className='bg-cyan-700 dark:bg-cyan-900 text-gray-100 w-full'
                         type="text"
                         name="userTextMessage" id="userTextMessage"
                         placeholder="Ask me anything..."

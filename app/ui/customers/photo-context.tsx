@@ -10,22 +10,31 @@ interface PhotoContextProps {
 }
 
 export const PhotoContext = createContext<PhotoContextProps>({
-    selectedPhoto: {id: 1, img_src: "abc"},
-    setSelectedPhoto: (_: MarsPhoto) => {},
+    selectedPhoto: undefined, //{id: 1, img_src: "abc"},
+    setSelectedPhoto: (_: MarsPhoto) => null,
 });
     
 export const usePhoto = () => useContext(PhotoContext);
 
-interface PhotoProviderProps {
-    children: React.ReactNode,
-}
+// interface PhotoProviderProps {
+//     children: React.ReactNode,
+// }
 
-export const PhotoProvider: React.FC<PhotoProviderProps> = ({children}) => {
+// export const PhotoProvider: React.FC<PhotoProviderProps> = ({children}) => {
+//     const [selectedPhoto, setSelectedPhoto] = useState<MarsPhoto>();
+//     return (
+//         <PhotoContext value={{selectedPhoto, setSelectedPhoto}}>
+//             {children}
+//         </PhotoContext>
+//     )
+// }
+
+export function PhotoProvider({children}: {children: React.ReactNode}) {
     const [selectedPhoto, setSelectedPhoto] = useState<MarsPhoto>();
     return (
-        <PhotoContext.Provider value={{selectedPhoto, setSelectedPhoto}}>
+        <PhotoContext value={{selectedPhoto, setSelectedPhoto}}>
             {children}
-        </PhotoContext.Provider>
+        </PhotoContext>
     )
 }
 

@@ -16,11 +16,11 @@ export function PhotosByPage({photos, currentPage, pageSize}
       const {setSelectedPhoto} = usePhoto();
               
       return (           
-          <div className="grid grid-cols-4 gap-2 z-20">       
+          <div className="grid grid-cols-4 gap-2 z-20 bg-surface text-text dark:bg-dsurface dark:text-dtext">       
             { photosByPage.map(photo => 
               <PhotoCard key={photo.id}            
                 photo={photo}               
-                handleClick={()=> {
+                handleClick={() => {
                   setSelectedPhoto(photo);                 
                   router.push(`/dashboard/customers/${photo.id.toString()}`);
                 }

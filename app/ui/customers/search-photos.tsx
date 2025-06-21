@@ -26,11 +26,11 @@ export default function SearchPhotos({ placeholder }: { placeholder: string }  )
   };
 
   return (
-    <div className="fixed w-full flex flex-1 h-10 items-center justify-items-center space-x-4 bg-teal-800/75">
+    <div className="fixed w-full flex flex-1 h-10 items-center justify-items-center space-x-4 bg-primary dark:bg-dprimary dark:text-dtext">
       <input
         type='date'
         value={inputValue}
-        className="peer block w-[20%] rounded-md border border-gray-200 py-2 pl-1 text-sm text-center outline-2 placeholder:text-gray-200 bg-teal-600"
+        className="peer block w-[20%] ml-1 rounded-md border border-gray-200 py-2 pl-1 text-sm text-center outline-2 placeholder:text-gray-400 bg-primary dark:bg-dprimary dark:text-dtext"
         placeholder={placeholder}
         // defaultValue={ searchParams.get('query') }
         onChange={ e => setInputValue(e.target.value) } // onChange={handleChange}

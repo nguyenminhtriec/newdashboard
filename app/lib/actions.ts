@@ -7,8 +7,6 @@ import postgres from 'postgres';
 
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { MarkOptions } from 'perf_hooks';
-import { NumericLiteral } from 'typescript';
 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -88,7 +86,6 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
   } catch (error) {
     console.log(error);
   }
-
  
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');

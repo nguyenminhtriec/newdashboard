@@ -16,14 +16,14 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
+        <div className="rounded-lg  bg-gray-50 dark:bg-gray-800 text-text dark:text-dtext p-2 md:pt-0">
+          <div className="md:hidden bg-primary/50 dark:bg-primary/50 text-text dark:text-dtext">
             {invoices?.map((invoice) => (
               <div
                 key={invoice.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full rounded-md bg-surface/50 dark:bg-dsurface/50 p-4"
               >
-                <div className="flex items-center justify-between border-b pb-4">
+                <div className="flex items-center justify-between border-b pb-4 dark:text-dtext">
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
@@ -54,7 +54,7 @@ export default async function InvoicesTable({
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
+          <table className="hidden min-w-full text-text dark:text-dtext md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -77,7 +77,7 @@ export default async function InvoicesTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-surface dark:bg-dsurface/50 dark:text-dtext">
               {invoices?.map((invoice) => (
                 <tr
                   key={invoice.id}

@@ -9,7 +9,7 @@ async function googleSignInAction() {
 export function GoogleLogIn() {
     return (
       <form action={googleSignInAction}>
-        <button className='w-full p-4 text-white bg-blue-600 rounded-md' type="submit">Sign in with Google</button>
+        <button className='w-full h-8 text-white bg-blue-600 rounded-md' type="submit">Sign in with Google</button>
       </form>
     )  
   }

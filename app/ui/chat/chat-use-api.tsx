@@ -12,7 +12,7 @@ export function ChatFace() {
     const [textMessage, setTextMessage] = useState('');
     const [history, setHistory] = useState<Message[]>([]);
 
-    console.log(history.slice(-1)[0]);   
+    // console.log(history.slice(-1)[0]);   
 
     async function handleMessage() {
         setHistory(prev => [...prev, {role: "user", text: textMessage}]);

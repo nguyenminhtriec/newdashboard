@@ -14,12 +14,14 @@ export default function LoginPage() {
           <div className="w-32 text-white md:w-36">
             <AcmeLogo />
           </div>
-        </div>
+        </div>        
         <Suspense>
           <LoginForm />
-          <GitHubLogIn />
-          <GoogleLogIn />
-        </Suspense>
+          <div className='px-6 py-4 space-y-4 bg-gray-100 rounded-md text-sm'>
+            <GitHubLogIn />
+            <GoogleLogIn />
+          </div>
+        </Suspense>        
       </div>
     </main>
   );

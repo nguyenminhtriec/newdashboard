@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class', // Enables dark mode using the "class" strategy (added by NMT)
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -17,6 +18,18 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        // Dark mode, added by NMT
+        dsurface: '#1e1e1e', // Dark Gray
+        dprimary: '#0A84FF', // Electric Blue
+        dsecondary: '#03DAC5', // Cyan
+        dtext: '#E0E0E0',
+        dborder: '#373737', // Neutral Gray
+        // Light mode
+        surface: '#ECEFF1', // Beige
+        primary: '#1E88E5', // Rich Blue
+        secondary: '#80CBC4', // Teal
+        text: '#212121', // Dark Gray
+        border: '#BDBDBD', // Light Gray       
       },
     },
     keyframes: {
